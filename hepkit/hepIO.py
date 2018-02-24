@@ -3,11 +3,11 @@ import numpy as np
 import pandas as pd
 import root_numpy as rnp
 
-def Pandafy(fileName, tree):
+def PandafyRoot(fileName, tree):
     df = pd.DataFrame(rnp.root2array(fileName,tree))
     return df
 
-def RootLs(fileName):
+def LsRoot(fileName):
     tFile = ROOT.TFile(fileName)
     for key in tFile.GetListOfKeys():
         print "%s \"%s\"" %(key.GetClassName(), key.GetName())
@@ -20,3 +20,8 @@ def RootLs(fileName):
                     for subSubKey in second.GetListOfKeys():
                         print "| |_%s \"%s\"" %(subSubKey.GetClassName(), subSubKey.GetName())
 
+def FromPickle(filename):
+    return pickle.load(open(filename,'rb'))
+
+def ToPickle(data,filename):
+    pickle.dump(data, open(filename,'wb'))
