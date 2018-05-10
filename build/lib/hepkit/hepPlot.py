@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def HepHist(data,nbins=20,xlims=[0,0],xtrim=False,xLog=False,yLog=False,color='C0',label='',norm=False,fill=True,alpha=0.1):
+def HepHist(data,nbins=20,xlims=[0,0],xtrim=False,xLog=False,yLog=False,color='C0',label='',norm=False,manualNorm=1,fill=True,alpha=0.1):
     if xlims[0] == 0 and xlims[1] == 0: xlims = [min(data),max(data)]
     ls = '-'
     lw = 2
@@ -15,8 +15,8 @@ def HepHist(data,nbins=20,xlims=[0,0],xtrim=False,xLog=False,yLog=False,color='C
     yerr = np.sqrt(hist)
     if norm:
         normFactor = float(np.sum(hist))
-        hist = hist/normFactor
-        yerr = yerr/normFactor
+        hist = (hist*manualNorm)/normFactor
+        yerr = (yerr*manualNorm)/normFactor
     plt.step(bin_edges[:-1],hist,where='post',color=color,linestyle=ls,lw=lw,label=label)
     plt.errorbar(bin_center,hist,xerr=xerr,fmt='.',color=color,lw=lw)
     plt.errorbar(bin_center,hist,yerr=yerr,fmt='.',color=color,lw=lw,capsize=3,elinewidth=1)
@@ -39,6 +39,7 @@ def HepHist(data,nbins=20,xlims=[0,0],xtrim=False,xLog=False,yLog=False,color='C
     if xLog: plt.xscale('log')
     if yLog: plt.yscale('log'); plt.gca().set_ylim(bottom=0.1)
     plt.grid(ls='--')
+    return bin_edges[:-1], hist
 
 def HepPlot(bin_lowEdge,yval,yerr=[0],color='C0',label='',fill=True,alpha=0.1):
     ls = '-'
