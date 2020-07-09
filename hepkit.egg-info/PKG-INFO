@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: hepkit
-Version: 0.0.1
+Version: 1.1.1
 Summary: Tools for performing High Energy Physics analysis with Python
 Home-page: https://github.com/sdporzio/HEPKit
 Author: Salvatore Davide Porzio

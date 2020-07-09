@@ -1,3 +1,4 @@
+README.md
 setup.py
 hepkit/__init__.py
 hepkit/hepData.py
